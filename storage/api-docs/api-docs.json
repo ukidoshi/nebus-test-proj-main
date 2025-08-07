@@ -1,0 +1,1074 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "REST API приложения для тестового задания",
+        "description": "API-документация для CRUD организаций, зданий, видов деятельности и аутентификации.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:80/api",
+            "description": "API сервер"
+        }
+    ],
+    "paths": {
+        "/activities": {
+            "get": {
+                "tags": [
+                    "Activities"
+                ],
+                "summary": "Получить все деятельности в бд",
+                "operationId": "b14ed4d53a740144ff049ec7cc961f2c",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "15"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список деятельностей",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Activities"
+                ],
+                "summary": "Создать новую активность",
+                "operationId": "17ca1fdfc4a2bdfc45cf306f694fa5e1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Строительство"
+                                    },
+                                    "parent_id": {
+                                        "type": "integer",
+                                        "example": "null"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Деятельность создана",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Превышен максимальный уровень вложенности (3)"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/activities/{id}": {
+            "put": {
+                "tags": [
+                    "Activities"
+                ],
+                "summary": "Обновить деятельность",
+                "operationId": "9cce514da02ea827e366ff51cf7bd8ce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Автомобили"
+                                    },
+                                    "parent_id": {
+                                        "type": "integer",
+                                        "example": "null"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Деятельность обновлена",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Превышен максимальный уровень вложенности (3)"
+                    },
+                    "404": {
+                        "description": "Деятельность не найдена"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Activities"
+                ],
+                "summary": "Удалить деятельность",
+                "operationId": "37ae59b21572084eada983b39be30e04",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Деятельность удалена",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/buildings": {
+            "get": {
+                "tags": [
+                    "Buildings"
+                ],
+                "summary": "Получить все здания в бд",
+                "operationId": "8dbf4d765ceccf748097033980369501",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "15"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список зданий",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Buildings"
+                ],
+                "summary": "Добавить новое здание",
+                "operationId": "91828bb17342458c9c9e1d3382ef3198",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "address",
+                                    "lat",
+                                    "lng"
+                                ],
+                                "properties": {
+                                    "address": {
+                                        "type": "string",
+                                        "example": "1-й Зачатьевский пер., д.6ст1"
+                                    },
+                                    "lat": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "55.74039"
+                                    },
+                                    "lng": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "37.60216"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Деятельность создана",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/buildings/{id}": {
+            "put": {
+                "tags": [
+                    "Buildings"
+                ],
+                "summary": "Обновить данные о здании",
+                "operationId": "fbc9958f26c4410b19f5b059bec2e49b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "address",
+                                    "lat",
+                                    "lng"
+                                ],
+                                "properties": {
+                                    "address": {
+                                        "type": "string",
+                                        "example": "1-й Зачатьевский пер., д.6ст1"
+                                    },
+                                    "lat": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "55.74039"
+                                    },
+                                    "lng": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "37.60216"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Здание обновлено",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Здание не найдено"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Buildings"
+                ],
+                "summary": "Удалить здание",
+                "operationId": "d5e7526ffccb2953f696d47de5b43656",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Здание удалено",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/organizations/{id}/activities/attach": {
+            "post": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Привязка видов деятельности к организациям",
+                "operationId": "4db97235fcde8b14d54d46d92cd7319a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID организации",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "activity_id"
+                                ],
+                                "properties": {
+                                    "activity_id": {
+                                        "description": "ID деятельности",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Информация об организации",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Организация не найдена"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/organizations/in-building": {
+            "get": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Список всех организаций находящихся в конкретном здании",
+                "operationId": "82313ef247dd73cbd53ac56e81d99d53",
+                "parameters": [
+                    {
+                        "name": "building_id",
+                        "in": "query",
+                        "description": "ID здания",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Количество результатов на странице",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Номер страницы",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список организаций"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/organizations/by-activity": {
+            "get": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Список всех организаций, которые относятся к указанному виду деятельности",
+                "operationId": "1724dd38e57cca320df87e74a582f688",
+                "parameters": [
+                    {
+                        "name": "activity_id",
+                        "in": "query",
+                        "description": "ID деятельности",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Количество результатов на странице (по умолчанию 10)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Номер страницы",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список организаций"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/organizations/by-radius": {
+            "get": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Список организаций, которые находятся в заданном радиусе",
+                "operationId": "06241e9e0010ab2af68b9af50e38dc36",
+                "parameters": [
+                    {
+                        "name": "lat",
+                        "in": "query",
+                        "description": "Широта",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "lng",
+                        "in": "query",
+                        "description": "Долгота",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "radius",
+                        "in": "query",
+                        "description": "Радиус поиска",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Количество результатов на странице (по умолчанию 10)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Номер страницы",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список организаций"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/organizations/by-box": {
+            "get": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Cписок организаций, которые находятся в заданной прямоугольной области",
+                "operationId": "88069184f006529997dc18e388f60f0c",
+                "parameters": [
+                    {
+                        "name": "lat",
+                        "in": "query",
+                        "description": "Широта",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "lng",
+                        "in": "query",
+                        "description": "Долгота",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "lat_2",
+                        "in": "query",
+                        "description": "Широта 2",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "lng_2",
+                        "in": "query",
+                        "description": "Долгота 2",
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Количество результатов на странице (по умолчанию 10)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Номер страницы",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список организаций"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/organizations/by-name": {
+            "get": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Поиск организации по названию",
+                "operationId": "cf8660b01345911f2cf0e51f31cbbf45",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Поиск",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Количество результатов на странице (по умолчанию 10)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Номер страницы",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список организаций"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/organizations": {
+            "get": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Получить список организаций с всеми фильтрами",
+                "operationId": "3952cb0969bc8305f39882b2637f9b12",
+                "parameters": [
+                    {
+                        "name": "building_id",
+                        "in": "query",
+                        "description": "ID здания",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "activity_id",
+                        "in": "query",
+                        "description": "ID деятельности",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "geo_type",
+                        "in": "query",
+                        "description": "Тип гео-поиска (принимает значения 'box' или 'radius')",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "string",
+                            "example": "radius"
+                        }
+                    },
+                    {
+                        "name": "lat",
+                        "in": "query",
+                        "description": "Широта, если указан geo_type 'box' или 'radius'",
+                        "required": false,
+                        "schema": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 55.7558
+                        }
+                    },
+                    {
+                        "name": "lng",
+                        "in": "query",
+                        "description": "Долгота, если указан geo_type 'box' или 'radius'",
+                        "required": false,
+                        "schema": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 37.6173
+                        }
+                    },
+                    {
+                        "name": "lat_2",
+                        "in": "query",
+                        "description": "Широта второй точки, если указан geo_type 'box'",
+                        "required": false,
+                        "schema": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 55.7558
+                        }
+                    },
+                    {
+                        "name": "lng_2",
+                        "in": "query",
+                        "description": "Долгота второй точки, если указан geo_type 'box'",
+                        "required": false,
+                        "schema": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 37.6173
+                        }
+                    },
+                    {
+                        "name": "radius",
+                        "in": "query",
+                        "description": "Радиус поиска в метрах (по умолчанию 1000м), если указан geo_type 'radius'",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1000
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Поисковый запрос по названию организации",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "кафе"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Количество результатов на странице (по умолчанию 10)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Номер страницы",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список организаций"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Добавить новую организацию",
+                "operationId": "73444d3d0c39d645824c15720b7fb98a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "building_id",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "building_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "АНО Живи"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Организация создана",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/organizations/{id}": {
+            "get": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Получить информацию об организации по ID",
+                "operationId": "c43fd8909d9758788d18f58819842e58",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID организации",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Информация об организации",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Организация не найдена"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Обновить данные об организации",
+                "operationId": "46a60849ec79411225ea3ed18dba7bd3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "building_id",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "building_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "ООО Металстрой"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Организация обновлена",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Организация не найдена"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Organizations"
+                ],
+                "summary": "Удалить организацию",
+                "operationId": "ea83ebb8503aa55a1a7ec8d026c8d566",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Организация удалена",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Activities"
+        },
+        {
+            "name": "Buildings"
+        },
+        {
+            "name": "Organizations",
+            "description": "Organizations"
+        }
+    ]
+}
