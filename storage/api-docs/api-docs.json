@@ -1187,7 +1187,7 @@
         "securitySchemes": {
             "sanctum": {
                 "type": "apiKey",
-                "description": "Enter token in format (Bearer <token>)",
+                "description": "Введите токен авторизации в формате (Bearer <token>)",
                 "name": "Authorization",
                 "in": "header"
             }

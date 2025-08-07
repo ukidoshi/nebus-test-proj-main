@@ -17,13 +17,15 @@
 
 **Развернуть проект:**
 
-Скопировать .env.example в .env(прописать в API_KEY рандомный ключ)
+Скопировать .env.example в .env
 
 Запустить эти команды:
 1. `composer update`
 2. `./vendor/bin/sail up`
 3. `sail artisan migrate`
 4. `sail artisan db:seed`
-4. `sail artisan meilisearch:setup --fresh`
+5. `sail artisan meilisearch:setup --fresh`
+6. `sail artisan l5-swagger:generate`
+7. 
 
 Дока доступна по ссылке `api/docs`
