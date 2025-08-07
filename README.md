@@ -26,6 +26,9 @@
 4. `sail artisan db:seed`
 5. `sail artisan meilisearch:setup --fresh`
 6. `sail artisan l5-swagger:generate`
-7. 
 
-Дока доступна по ссылке `api/docs`
+
+Дока доступна по ссылке `api/docs`:
+Выполнить процедуру регистрации -> получить api токен(скопировать).
+Нажать <b>"Authorize"</b> и в окошке ввести "Bearer <скопированный_токен>" 
+
