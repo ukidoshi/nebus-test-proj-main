@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ActivityRequest;
 use App\Http\Requests\BuildingRequest;
-use App\Http\Resources\ActivityResource;
 use App\Http\Resources\BuildingResource;
-use App\Models\Activity;
 use App\Models\Building;
 use Illuminate\Http\Request;
 

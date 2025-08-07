@@ -18,7 +18,6 @@ namespace App\Http\Controllers;
  *     securityScheme="sanctum",
  *     type="http",
  *     scheme="bearer",
- *     bearerFormat="Token",
  *     description="Авторизация по токену Laravel Sanctum"
  * )
  */
